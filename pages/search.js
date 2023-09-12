@@ -24,6 +24,7 @@ const Search = () => {
         getMovies(q);
     }, [q]);
 
+
     return (
         <>
             <Header />
@@ -32,7 +33,11 @@ const Search = () => {
                 <h2 className={styles.title}>
                     <span className={styles.keyword}>{q}</span> 검색 결과
                 </h2>
-                <MovieList movies={movies} />
+                {movies ? (
+                    <MovieList movies={movies} />
+                ) : (
+                    <div>검색한 결과가 없습니다.</div>
+                )}
             </Container>
         </>
     );

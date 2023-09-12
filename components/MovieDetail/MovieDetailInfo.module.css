@@ -1,0 +1,57 @@
+.header {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.poster {
+    aspect-ratio: 27 / 40;
+    width: 350px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+}
+
+.englishTitle {
+    margin: 0;
+    color: #b5b5b5;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.title {
+    margin: 5px 0 20px;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 35px;
+}
+
+.infoTable {
+    margin: -15px -40px;
+    border-spacing: 40px 15px;
+}
+
+.infoTable li {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.infoTable .infoTitle {
+    display: block;
+    width: 120px;
+    color: #b5b5b5;
+    font-weight: 400;
+    font-size: 18px;
+    text-align: left;
+}
+
+.starRating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

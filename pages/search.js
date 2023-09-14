@@ -24,21 +24,17 @@ const Search = () => {
         getMovies(q);
     }, [q]);
 
-
     return (
         <>
-            <Header />
-            <Container page>
-                <SearchForm initialValue={q} />
-                <h2 className={styles.title}>
-                    <span className={styles.keyword}>{q}</span> 검색 결과
-                </h2>
-                {movies ? (
-                    <MovieList movies={movies} />
-                ) : (
-                    <div>검색한 결과가 없습니다.</div>
-                )}
-            </Container>
+            <SearchForm initialValue={q} />
+            <h2 className={styles.title}>
+                <span className={styles.keyword}>{q}</span> 검색 결과
+            </h2>
+            {movies ? (
+                <MovieList movies={movies} />
+            ) : (
+                <div>검색한 결과가 없습니다.</div>
+            )}
         </>
     );
 };

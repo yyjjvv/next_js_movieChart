@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 
@@ -37,6 +38,9 @@ const Movie = () => {
 
     return (
         <>
+            <Head>
+                <title>{movie.title} - Watchit</title>
+            </Head>
             <MovieDetailInfo movie={movie} />
             <section className={styles.section}>
                 <h2 className={styles.sectionTitle}>소개</h2>

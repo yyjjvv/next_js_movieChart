@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useState, useEffect } from "react";
 
 import axios from "@/api/axios";
@@ -20,6 +21,9 @@ const Home = () => {
     }, []);
     return (
         <>
+            <Head>
+                <title>Watchit</title>
+            </Head>
             <SearchForm />
             <MovieList className={styles.movieList} movies={movies} />
         </>

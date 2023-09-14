@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 
@@ -24,6 +25,9 @@ const Search = () => {
 
     return (
         <>
+            <Head>
+                <title>{q} 검색 결과 - Watchit</title>
+            </Head>
             <SearchForm initialValue={q} />
             <h2 className={styles.title}>
                 <span className={styles.keyword}>{q}</span> 검색 결과

@@ -8,7 +8,7 @@ const MovieDetailInfo = ({ movie }) => {
             <div className={styles.poster}>
                 <Image
                     src={movie.posterUrl}
-                    alt={movie.name}
+                    alt={movie.title}
                     sizes="100%"
                     fill
                 />

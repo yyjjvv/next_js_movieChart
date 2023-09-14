@@ -1,0 +1,17 @@
+.movieReview {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  border-radius: 10px;
+  background: #1f1f1f;
+  padding: 25px;
+}
+
+.date {
+  color: #b5b5b5;
+  font-weight: 300;
+}
+
+.age {
+  flex-grow: 1;
+}

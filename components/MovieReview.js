@@ -1,3 +1,4 @@
+import styles from './Movie.module.css'
 import formatDate from "@/util/formatDate";
 
 import StarRating from "./StarRating";

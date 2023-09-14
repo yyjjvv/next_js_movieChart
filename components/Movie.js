@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import styles from "./Movie.module.css";
 
@@ -8,11 +9,9 @@ const Movie = ({ movie }) => {
     return (
         <li>
             <Link href={`/movies/${movie.id}`}>
-                <img
-                    className={styles.poster}
-                    src={movie.posterUrl}
-                    alt={movie.title}
-                />
+                <div className={styles.poster}>
+                    <Image src={movie.posterUrl} alt={movie.title} sizes="100%" fill />
+                </div>
             </Link>
             <div className={styles.info}>
                 <h2 className={styles.title}>{movie.title}</h2>

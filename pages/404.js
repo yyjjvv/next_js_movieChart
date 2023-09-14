@@ -1,7 +1,6 @@
 import styles from "@/styles/NotFound.module.css";
 
 import Container from "@/components/Layout/Container";
-import Header from "@/components/Layout/Header";
 import ButtonLink from "@/components/UI/ButtonLink";
 
 const NotFound = () => {

@@ -1,6 +1,4 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
 
 import axios from "@/api/axios";
 import styles from "@/styles/Search.module.css";
@@ -8,20 +6,19 @@ import styles from "@/styles/Search.module.css";
 import MovieList from "@/components/MovieList";
 import SearchForm from "@/components/SearchForm";
 
-const Search = () => {
-    const [movies, setMovies] = useState([]);
-    const router = useRouter();
-    const { q } = router.query;
-
-    const getMovies = async (query) => {
-        const res = await axios.get(`/movies/?q=${query}`);
-        const newMovies = res.data.results;
-        setMovies(newMovies);
+export const getServerSideProps = async (context) => {
+    const q = context.query["q"];
+    const res = await axios.get(`/movies/?q=${q}`);
+    const movies = res.data.results;
+    return {
+        props: {
+            q,
+            movies,
+        },
     };
+};
 
-    useEffect(() => {
-        getMovies(q);
-    }, [q]);
+const Search = ({ q, movies }) => {
 
     return (
         <>

@@ -9,19 +9,7 @@ import Spinner from "@/components/Spinner";
 import MovieDetailInfo from "@/components/MovieDetail/MovieDetailInfo";
 import MovieReviewList from "@/components/MovieReviewList";
 
-export const getStaticPaths = async () => {
-    const res = await axios.get(`/movies/`);
-    const movies = res.data.results;
-    const paths = movies.map((movie) => ({
-        params: { id: String(movie.id) },
-    }));
-    return {
-        paths,
-        fallback: true, //없는 경로 처리
-    };
-};
-
-export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
     const targetId = context.params["id"];
     let movie;
     try {
@@ -33,29 +21,18 @@ export const getStaticProps = async (context) => {
         };
     }
 
+    const res = await axios.get(`/movie_reviews/?movie_id=${targetId}`);
+    const movieReviews = res.data ?? [];
+
     return {
         props: {
             movie,
+            movieReviews,
         },
     };
 };
 
-const Movie = ({ movie }) => {
-    // const [movie, setMovie] = useState();
-    const [movieReviews, setMovieReviews] = useState([]);
-    const router = useRouter();
-    const { id } = router.query;
-
-    const getMovieReviews = async (targetId) => {
-        const res = await axios.get(`/movie_reviews/?movie_id=${targetId}`);
-        const newMovieReviews = res.data;
-        setMovieReviews(newMovieReviews);
-    };
-
-    useEffect(() => {
-        if (!id) return;
-        getMovieReviews(id);
-    }, [id]);
+const Movie = ({ movie, movieReviews }) => {
 
     if (!movie)
         return (

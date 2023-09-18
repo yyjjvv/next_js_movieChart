@@ -5,22 +5,46 @@ import { useState, useEffect } from "react";
 import axios from "@/api/axios";
 import styles from "@/styles/Movie.module.css";
 
-import Container from "@/components/Layout/Container";
-import Header from "@/components/Layout/Header";
+import Spinner from "@/components/Spinner";
 import MovieDetailInfo from "@/components/MovieDetail/MovieDetailInfo";
 import MovieReviewList from "@/components/MovieReviewList";
 
-const Movie = () => {
-    const [movie, setMovie] = useState();
+export const getStaticPaths = async () => {
+    const res = await axios.get(`/movies/`);
+    const movies = res.data.results;
+    const paths = movies.map((movie) => ({
+        params: { id: String(movie.id) },
+    }));
+    return {
+        paths,
+        fallback: true, //없는 경로 처리
+    };
+};
+
+export const getStaticProps = async (context) => {
+    const targetId = context.params["id"];
+    let movie;
+    try {
+        const res = await axios.get(`/movies/${targetId}`);
+        movie = res.data;
+    } catch {
+        return {
+            notFound: true,
+        };
+    }
+
+    return {
+        props: {
+            movie,
+        },
+    };
+};
+
+const Movie = ({ movie }) => {
+    // const [movie, setMovie] = useState();
     const [movieReviews, setMovieReviews] = useState([]);
     const router = useRouter();
     const { id } = router.query;
-
-    const getMovie = async (targetId) => {
-        const res = await axios.get(`/movies/${targetId}`);
-        const newMovie = res.data;
-        setMovie(newMovie);
-    };
 
     const getMovieReviews = async (targetId) => {
         const res = await axios.get(`/movie_reviews/?movie_id=${targetId}`);
@@ -30,11 +54,16 @@ const Movie = () => {
 
     useEffect(() => {
         if (!id) return;
-        getMovie(id);
         getMovieReviews(id);
     }, [id]);
 
-    if (!movie) return null;
+    if (!movie)
+        return (
+            <div className={styles.loading}>
+                <Spinner />
+                <p>로딩중입니다. 잠시만 기다려주세요.</p>
+            </div>
+        );
 
     return (
         <>

@@ -7,18 +7,17 @@ import styles from "@/styles/Home.module.css";
 import MovieList from "@/components/MovieList";
 import SearchForm from "@/components/SearchForm";
 
-const Home = () => {
-    const [movies, setMovies] = useState([]);
-
-    const getMovies = async () => {
-        const res = await axios.get(`/movies`);
-        const newMovies = res.data.results;
-        setMovies(newMovies);
+export const getStaticProps = async () => {
+    const res = await axios.get(`/movies`);
+    const movies = res.data.results;
+    return {
+        props: {
+            movies,
+        },
     };
+};
 
-    useEffect(() => {
-        getMovies();
-    }, []);
+const Home = ({ movies }) => {
     return (
         <>
             <Head>

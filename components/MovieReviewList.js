@@ -10,7 +10,7 @@ const MovieReviewList = ({ movieReviews }) => {
     return (
         // <div>dd</div>
         <ul className={styles.movieReviewList}>
-            {movieReviews.results.map((movieReview) => (
+            {movieReviews.map((movieReview) => (
                 <MovieReview key={movieReview.id} movieReview={movieReview} />
             ))}
         </ul>
